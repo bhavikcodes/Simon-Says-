@@ -7,12 +7,29 @@ let level = 0;
 let hs = 0;
 let heading = document.querySelector("h1");
 let hse = document.createElement("h4");
+let mobbtn= document.querySelector("#st"); 
+
+mobbtn.addEventListener("click",function(){
+    mobbtn.innerText = "Start";
+    if(started == false){
+        console.log("game started");
+        started = true;
+        setTimeout(levelup,1000);
+        
+        heading.append(hse);
+        hse.innerText = `High Score: ${hs}`;
+
+    }
+    mobbtn.style.display = "none";
+
+    
+})
 
 document.addEventListener("keypress",function(){  // step 1
     if(started == false){
         console.log("game started");
         started = true;
-        levelup();
+        setTimeout(levelup,1000);
         
         heading.append(hse);
         hse.innerText = `High Score: ${hs}`;
@@ -26,7 +43,7 @@ function btnflash(btn){
    btn.style.backgroundColor = "white";
    setTimeout(function(){
     btn.style.backgroundColor = orgcol;
-   }, 400);
+   }, 200);
 }
 
 function levelup(){   
@@ -60,7 +77,9 @@ function checkAns(idx){
             document.querySelector("body").style.backgroundColor = oc;
         },200);
         h4.innerHTML = `Game Over, <b>your score was ${level-1} </b>.<br> Press any key to restart`;
+        mobbtn.innerText = "Restart";
         reset();
+        mobbtn.style.display = "block";
  }
 
 }
@@ -82,4 +101,5 @@ function reset(){
     level = 0;
     gs = [];
     us = [];
+    
 }
